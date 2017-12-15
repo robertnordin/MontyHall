@@ -3,6 +3,8 @@ package se.monty;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+import javax.print.attribute.standard.NumberUpSupported;
+
 public class MontyHall {
 
 	private static Random rnd = new Random(System.currentTimeMillis());
@@ -12,7 +14,15 @@ public class MontyHall {
 	}
 
 	public static void main(String[] args) {
-		int numberOfGamesToRun = 1250000;
+		int numberOfGamesToRun = 10000;
+		if (args.length == 1) {
+			try {
+				numberOfGamesToRun = Integer.valueOf(args[0]);
+			}
+			catch (NumberFormatException ex) {
+				System.err.print("Could not parse: " + args[0] + " as integer, using default: " + numberOfGamesToRun);
+			}
+		}
 		int firstSelectionWins = 0;
 		int switchSelectionWins = 0;
 
